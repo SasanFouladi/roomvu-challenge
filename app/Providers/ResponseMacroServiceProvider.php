@@ -35,14 +35,14 @@ class ResponseMacroServiceProvider extends ServiceProvider
                 'status' => true,
                 'data' => $data,
                 'links' => [
-                    'first' => $paginate->url($paginate->onFirstPage()),
+                    'first' => $paginate->url(1),
                     'last' => $paginate->url($paginate->lastPage()),
                     'prev' => $paginate->previousPageUrl(),
-                    'next' => $paginate->nextPageUrl()
+                    'next' => $paginate->nextPageUrl(),
                 ],
                 'meta' => [
-                    "current_page" => $paginate->currentPage(),
-                    "last_page" => $paginate->lastPage(),
+                    'current_page' => $paginate->currentPage(),
+                    'last_page' => $paginate->lastPage(),
                     'path' => $paginate->path(),
                     'per_page' => $paginate->perPage(),
                     'total' => $paginate->total(),
@@ -91,7 +91,7 @@ class ResponseMacroServiceProvider extends ServiceProvider
             return response()->json([
                 'status' => false,
                 'message' => $message,
-                'errors' => $errors
+                'errors' => $errors,
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         });
 

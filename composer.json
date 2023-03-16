@@ -17,7 +17,9 @@
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0"
+        "spatie/laravel-ignition": "^1.0",
+        "laravel/pint": "^1.0",
+        "nunomaduro/larastan": "^2.2"
     },
     "autoload": {
         "psr-4": {
@@ -32,6 +34,8 @@
         }
     },
     "scripts": {
+        "stan": ["./vendor/bin/phpstan analyse"],
+        "pint": ["./vendor/bin/pint"],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
