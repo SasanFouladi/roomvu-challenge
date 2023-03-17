@@ -1,0 +1,210 @@
+openapi: 3.0.0
+
+info:
+  title: Roomvue Challenge API collection
+  description: API description in Markdown for Roomvue challenge application.
+  version: 1.0.0
+
+servers:
+  - url: http://127.0.0.1:8000/api
+
+tags:
+  - name: Wallet
+    description: 'Wallet APIs'
+
+##################################################################################
+################################### END POINTS ###################################
+##################################################################################
+
+paths:
+
+  ########################## Wallet #####################################
+
+  /get-balance:
+    get:
+      operationId: 'wallet_getBalance'
+      summary: 'get user balance'
+      tags:
+        - Wallet
+      parameters:
+        - in: query
+          name: user_id
+          required: true
+          schema:
+            type: 'integer'
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                type: 'object'
+                properties:
+                  status:
+                    type: 'boolean'
+                  data:
+                    type: 'object'
+                    properties:
+                      balance:
+                        type: number
+                  message:
+                    type: 'string'
+        '500':
+          $ref: '#/components/responses/response_500'
+        '422':
+          $ref: '#/components/responses/response_422'
+
+  /add-money:
+    post:
+      operationId: 'wallet_addMoney'
+      summary: 'deposit or withdraw in user wallet'
+      tags:
+        - Wallet
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: 'object'
+              properties:
+                user_id:
+                  type: integer
+                amount:
+                  type: number
+      responses:
+        '200':
+          description: 'successful operation'
+          content:
+            application/json:
+              schema:
+                type: 'object'
+                properties:
+                  status:
+                    type: 'boolean'
+                  data:
+                    type: 'object'
+                    properties:
+                      reference_id:
+                        type: string
+                  message:
+                    type: 'string'
+        '400':
+          $ref: '#/components/responses/response_400'
+        '422':
+          $ref: '#/components/responses/response_422'
+        '500':
+          $ref: '#/components/responses/response_500'
+
+
+##################################################################################
+################################### COMPONENTS ###################################
+##################################################################################
+
+components:
+  responses:
+    response_200_empty:
+      description: 'operation successfully done.'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              status:
+                type: 'boolean'
+                default: true
+              message:
+                type: 'string'
+
+    response_400:
+      description: 'bad request from client. can not do the action.'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              status:
+                type: 'boolean'
+                default: false
+              message:
+                type: 'string'
+
+    response_401:
+      description: 'authentication error. expired or revoked token'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              status:
+                type: 'boolean'
+                default: false
+              message:
+                type: 'string'
+                default: 'Unauthenticated.'
+
+    response_403:
+      description: 'action is denied'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              status:
+                type: 'boolean'
+                default: false
+              message:
+                type: 'string'
+                default: 'Forbidden.'
+
+    response_404:
+      description: 'resource not found'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              status:
+                type: 'boolean'
+                default: false
+              message:
+                type: 'string'
+                default: 'Not found.'
+
+    response_422:
+      description: 'validation errors (user inputs)'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              status:
+                type: 'boolean'
+                default: false
+              message:
+                type: 'string'
+                default: 'Validation error.'
+              errors:
+                type: 'object'
+                properties:
+                  key:
+                    type: 'array'
+                    items:
+                      type: 'string'
+              errors_list:
+                type: 'array'
+                items:
+                  type: 'string'
+
+    response_500:
+      description: 'server error'
+      content:
+        application/json:
+          schema:
+            type: 'object'
+            properties:
+              status:
+                type: 'boolean'
+                default: false
+              message:
+                type: 'string'
+                default: 'Server error.'
