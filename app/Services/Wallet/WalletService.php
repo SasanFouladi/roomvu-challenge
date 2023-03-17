@@ -26,12 +26,11 @@ class WalletService implements WalletContract
         try {
             /** @var Wallet $wallet */
             $wallet = Wallet::query()->firstOrCreate(['user_id' => $userId]);
-            if ($wallet->canTransaction($amount)) {
+            if ($amount < 0 and $wallet->canWithdraw($amount)) {
                 throw new InsufficientFunds();
             }
             /** @var Transaction $transaction */
             $transaction = $wallet->transactions()->create([
-                'type' => $this->getTransactionType($amount),
                 'amount' => $amount,
             ]);
 
@@ -39,15 +38,10 @@ class WalletService implements WalletContract
             $wallet->save();
             DB::commit();
 
-            return $transaction->uuid;
+            return $transaction->reference_id;
         } catch (\Exception $exception) {
             DB::rollBack();
-            throw $exception;
+            throw new $exception;
         }
-    }
-
-    public function getTransactionType($amount): string
-    {
-        return $amount < 0 ? Transaction::TYPES['WITHDRAW'] : Transaction::TYPES['DEPOSIT'];
     }
 }

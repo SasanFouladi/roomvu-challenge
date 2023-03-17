@@ -24,9 +24,9 @@ class Wallet extends Model
         'balance',
     ];
 
-    public function canTransaction(float $amount): bool
+    public function canWithdraw(float $amount): bool
     {
-        return $amount < 0 and $this->balance < $amount;
+        return $this->balance < abs($amount);
     }
 
     public function transactions(): HasMany
