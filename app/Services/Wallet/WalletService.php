@@ -11,7 +11,7 @@ class WalletService implements WalletContract
 {
     public function getBalance(int $userId): float
     {
-        /** @var Wallet $wallet */
+        /** @var Wallet|null $wallet */
         $wallet = Wallet::query()->where('user_id', $userId)->first();
 
         return $wallet ? $wallet->balance : 0;

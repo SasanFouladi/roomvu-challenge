@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Str;
 
 /**
- * @property $wallet_id
- * @property $type
- * @property $amount
- * @property $meta
- * @property $reference_id
+ * @property int $id
+ * @property int $wallet_id
+ * @property string $type
+ * @property float $amount
+ * @property array $meta
+ * @property string $reference_id
  */
 class Transaction extends Model
 {
@@ -21,7 +22,7 @@ class Transaction extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<string>
      */
     protected $fillable = [
         'wallet_id',
@@ -31,7 +32,8 @@ class Transaction extends Model
         'reference_id',
     ];
 
-    public static function boot() {
+    public static function boot()
+    {
         parent::boot();
 
         static::creating(function (Transaction $transaction) {

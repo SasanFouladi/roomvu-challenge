@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Exceptions\InsufficientFunds;
 use App\Models\Wallet;
 use App\Services\Wallet\WalletService;
@@ -12,7 +11,6 @@ class WalletServiceTest extends TestCase
      * Get balance for a user who does not wallet.
      *
      * @test
-     * @return void
      */
     public function user_does_not_have_a_wallet(): void
     {
@@ -25,7 +23,6 @@ class WalletServiceTest extends TestCase
      * User has wallet and get balance.
      *
      * @test
-     * @return void
      */
     public function user_has_wallet_and_get_balance(): void
     {
@@ -39,7 +36,7 @@ class WalletServiceTest extends TestCase
      * User can deposit money to wallet.
      *
      * @test
-     * @return void
+     *
      * @throws InsufficientFunds
      */
     public function user_deposit_money_to_wallet(): void
@@ -57,7 +54,7 @@ class WalletServiceTest extends TestCase
      * User can withdraw money from wallet.
      *
      * @test
-     * @return void
+     *
      * @throws InsufficientFunds
      */
     public function user_withdraw_money_from_wallet(): void
@@ -75,7 +72,7 @@ class WalletServiceTest extends TestCase
      * User does not have enough money for withdraw.
      *
      * @test
-     * @return void
+     *
      * @throws InsufficientFunds
      */
     public function user_does_not_have_enough_money_for_withdraw(): void
@@ -93,7 +90,7 @@ class WalletServiceTest extends TestCase
      * User must have consistent balance and transactions.
      *
      * @test
-     * @return void
+     *
      * @throws InsufficientFunds
      */
     public function user_must_have_consistent_balance_and_transactions(): void
@@ -116,14 +113,14 @@ class WalletServiceTest extends TestCase
     public function totalTestCases(): array
     {
         return[
-            "deposit - 50" => [50, 50],
-            "deposit - 40" => [40, 90],
-            "deposit - 80" => [80, 170],
-            "deposit - 100" => [100, 270],
-            "withdraw - 130" => [-130, 140],
-            "withdraw - 20" => [-20, 120],
-            "withdraw - 60.4" => [-60.4, 59.6],
-            "deposit - 4.4" => [4.8, 64.4],
+            'deposit - 50' => [50, 50],
+            'deposit - 40' => [40, 90],
+            'deposit - 80' => [80, 170],
+            'deposit - 100' => [100, 270],
+            'withdraw - 130' => [-130, 140],
+            'withdraw - 20' => [-20, 120],
+            'withdraw - 60.4' => [-60.4, 59.6],
+            'deposit - 4.4' => [4.8, 64.4],
         ];
     }
 }

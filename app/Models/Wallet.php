@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * @property $user_id
- * @property $balance
+ * @property int $id
+ * @property int $user_id
+ * @property float $balance
  */
 class Wallet extends Model
 {
@@ -17,7 +18,7 @@ class Wallet extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<string>
      */
     protected $fillable = [
         'user_id',
