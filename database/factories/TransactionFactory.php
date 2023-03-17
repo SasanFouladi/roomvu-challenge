@@ -23,7 +23,7 @@ class TransactionFactory extends Factory
                 return Wallet::factory()->create();
             },
             'type' => $this->faker->randomElement(Transaction::TYPES),
-            'amount' => rand(),
+            'amount' => rand(1, 1000),
         ];
     }
 }

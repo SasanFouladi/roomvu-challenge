@@ -46,7 +46,6 @@ services:
             - '${DOCKER_DB_PORT}:3306'
         volumes:
             - roomvu-mysql:/var/lib/mysql
-            - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
         networks:
             - backend
 

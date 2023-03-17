@@ -15,3 +15,4 @@ use App\Http\Controllers\API\WalletController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('get-balance', [WalletController::class, 'getBalance'])->name('get_balance');
+Route::post('add-money', [WalletController::class, 'addMoney'])->name('add_money');

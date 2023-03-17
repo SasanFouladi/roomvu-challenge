@@ -17,8 +17,8 @@ class WalletFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => rand(),
-            'balance' => rand(),
+            'user_id' => rand(1, 1000),
+            'balance' => rand(100, 1000),
         ];
     }
 }

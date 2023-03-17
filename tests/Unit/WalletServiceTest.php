@@ -14,7 +14,7 @@ class WalletServiceTest extends TestCase
      */
     public function user_does_not_have_a_wallet(): void
     {
-        $userId = rand();
+        $userId = rand(1, 1000);
         $walletService = new WalletService();
         $this->assertEquals(0, $walletService->getBalance($userId));
     }
