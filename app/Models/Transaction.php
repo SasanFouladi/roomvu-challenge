@@ -5,8 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property $wallet_id
+ * @property $type
+ * @property $amount
+ * @property $meta
+ * @property $uuid
+ */
 class Transaction extends Model
 {
     use HasFactory;
